@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
 using System;
@@ -16,16 +18,38 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        public List<Customer> GetAll()
+        public IResult Add(Customer customer)
         {
-            return _customerDal.GetAll();
+            if (customer.CompanyName.Length<2)
+            {
+                return new ErrorResult(Messages.CustomerNotAdded);
+            }
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.CustomerAdded);
+        }
+
+        public IResult Delete(Customer customer)
+        {
+            _customerDal.Delete(customer);
+            return new SuccessResult(Messages.CustomerDeleted);
+        }
+
+        public IDataResult<List<Customer>> GetAll()
+        {
+            return new SuccessDataResult<List<Customer>> (_customerDal.GetAll());
         }
 
         
 
-        public List<Customer> GetByCustomerId(int id)
+        public IDataResult<List<Customer>> GetByCustomerId(int id)
         {
-            return _customerDal.GetAll(c => c.CustomerId == id);
+            return new SuccessDataResult<List< Customer >> (_customerDal.GetAll(c => c.CustomerId == id.ToString()));
+        }
+
+        public IResult Update(Customer customer)
+        {
+            _customerDal.Update(customer);
+            return new SuccessResult(Messages.CustomerUpdate);
         }
     }
 }

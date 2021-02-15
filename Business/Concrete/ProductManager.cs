@@ -31,7 +31,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAll()
         {
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour==23)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MainintenanceTime);
             }
@@ -58,7 +58,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
         }
 
-        
+        public IResult Update(Product product)
+        {
+            _productDal.Update(product);
+            return new SuccessResult(Messages.ProductUpdate);
+        }
     }
 }
 //BEN DIYORUM Kİ DATAACCESSE SOR BAKALIM  IZNI VARMI  GİBİ DÜŞÜNEBİLİRİZ
