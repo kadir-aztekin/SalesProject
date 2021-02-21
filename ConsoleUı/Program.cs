@@ -9,7 +9,7 @@ namespace ConsoleUı
         static void Main(string[] args)
         {
             //Data Transformation Objects :DTOs
-
+            Console.WriteLine("kingaras");
             
 
 
@@ -40,10 +40,10 @@ namespace ConsoleUı
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 
-            foreach (var x in categoryManager.GetAll())
-            {
-                Console.WriteLine(x.CategoryName);
-            }
+            //foreach (var x in categoryManager.GetAll())
+            //{
+            //    Console.WriteLine(x.CategoryName);
+            //}
         }
     }
 }
