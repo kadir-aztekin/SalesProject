@@ -20,6 +20,9 @@ namespace Business.Constants
         public static string CustomerNotAdded = "Müşteri Eklenemedi";
         public static string CustomerAdded = "Müşteri Eklendi";
         public static string CustomerUpdate = "Müşteri Güncellendi";
+        public static string ProductCountOfCategoryError = "Bir kategoride en fazla 10 ürün vardir";
+        public static string ProductNameAlreadyExists = "Bu isimde zaten başka bir ürün var ";
+        internal static string CategoryLimitExceded;
     }
 }
 
