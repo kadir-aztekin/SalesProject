@@ -17,6 +17,8 @@ namespace Core.Utilities.Business
                 if (!logic.Success)
                 {
                     return logic; 
+
+                    //error dondurmedık cunku bız productmanager ıcınde error veya success verdık bu sadece calıs ve gez dıyoruz 
                 }
             }
             return null;

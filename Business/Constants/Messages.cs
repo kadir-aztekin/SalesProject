@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -22,7 +24,14 @@ namespace Business.Constants
         public static string CustomerUpdate = "Müşteri Güncellendi";
         public static string ProductCountOfCategoryError = "Bir kategoride en fazla 10 ürün vardir";
         public static string ProductNameAlreadyExists = "Bu isimde zaten başka bir ürün var ";
-        internal static string CategoryLimitExceded;
+        public static string CategoryLimitExceded;
+        public static string AuthorizationDenied = "Yetkiniz Yok ";
+        public static string UserRegistered = "Kayıt Oldu ";
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Parola Hatası";
+        public static string SuccessfulLogin = "Başarılı giriş ";
+        public static string UserAlreadyExists = "Kullanıcı mevcut  " ;
+        internal static string AccessTokenCreated = "Token Oluşturuldu";
     }
 }
 
