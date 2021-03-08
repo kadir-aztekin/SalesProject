@@ -48,8 +48,8 @@ namespace Core.Utilities.Security.JWT
                 issuer: tokenOptions.Issuer,
                 audience: tokenOptions.Audience,                           //APİDEKİ TOKENOPTİONSLARI KULLANARAK BIZ BURDA JWT OLUSTURUYORUZ 
                 expires: _accessTokenExpiration,
-                notBefore: DateTime.Now,
-                claims: SetClaims(user, operationClaims),  //ALT TARAFTA BİZ METHOD  TANIMLADIK 
+                notBefore: DateTime.Now, //eğer tokun experition bilgisi suandan onceyse yani şart
+                claims: SetClaims(user, operationClaims),  //user sınıfının ıcersınde ad soyad mail ... onları burda tanımlamak yerıne kısaca alt tarafta tanımladım 
                 signingCredentials: signingCredentials
             );
             return jwt;

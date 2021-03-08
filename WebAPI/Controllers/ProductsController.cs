@@ -2,6 +2,7 @@
 using Business.Concrete;
 using DataAccess.Concrete.EntityFrameWork;
 using Entity.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,6 +29,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")] //select * from ıslemı gıbı dusun 
+        [Authorize(Roles ="Product.List")]
         public IActionResult GetAll()
         {
 

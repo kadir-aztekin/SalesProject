@@ -11,10 +11,10 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class AuthManager : IAuthService
+    public class AuthManager : IAuthService //kullanıcı varmı yokmu register veya login olayı
     {
-        private IUserService _userService;
-        private ITokenHelper _tokenHelper;
+        private IUserService _userService; //kullanıcı kontrolu için 
+        private ITokenHelper _tokenHelper; //kullanıcı login oldugunda ona token vermemız lazım 
 
         public AuthManager(IUserService userService, ITokenHelper tokenHelper)
         {
@@ -22,13 +22,14 @@ namespace Business.Concrete
             _tokenHelper = tokenHelper;
         }
 
-        public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
+        public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password) //yeni kullanıcı ekleme
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            var user = new User
+            var user = new User //yeni kullanıcı ekleme  
+            //zaten dto tablosunda bız propları tanımladık 
             {
-                Email = userForRegisterDto.Email,
+                Email = userForRegisterDto.Email,   
                 FirstName = userForRegisterDto.FirstName,
                 LastName = userForRegisterDto.LastName,
                 PasswordHash = passwordHash,
@@ -39,32 +40,33 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
-        public IDataResult<User> Login(UserForLoginDto userForLoginDto)
+        public IDataResult<User> Login(UserForLoginDto userForLoginDto) //öncedn kayıt olmusları test edıyoruz varmı yokmu
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email);
+            var userToCheck = _userService.GetByMail(userForLoginDto.Email); //kullanıcı var mı?
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
             }
-
+            //şifre varmı ?
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
             {
                 return new ErrorDataResult<User>(Messages.PasswordError);
             }
 
-            return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
+            return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin); //yukardan geçtiyse hepsı var 
         }
 
-        public IResult UserExists(string email)
+        public IResult UserExists(string email) //kullanıcı varmı 
         {
-            if (_userService.GetByMail(email) != null)
+            if (_userService.GetByMail(email) != null) //boş degıl demekkı yanı oncedeen bu kullanıcı mevcut 
             {
                 return new ErrorResult(Messages.UserAlreadyExists);
             }
             return new SuccessResult();
         }
 
-        public IDataResult<AccessToken> CreateAccessToken(User user)
+        public IDataResult<AccessToken> CreateAccessToken(User user) //kullanıcı kayıt olduktan sonra  veya login 
+                                                                     // kullanıcya token verecegız ve gırıs cıkısı token la yapcak 
         {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims);
