@@ -33,7 +33,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 
         public bool IsAdd(string key)
         {
-            return _memoryCache.TryGetValue(key,out _);
+            return _memoryCache.TryGetValue(key,out _); //treyget value varmı boyle bı değer demek ,, out_ bos dondurmek demek
         }
 
         public void Remove(string key)

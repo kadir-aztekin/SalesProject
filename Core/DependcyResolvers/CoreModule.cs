@@ -13,9 +13,9 @@ namespace Core.DependcyResolvers
     {
         public void Load(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddMemoryCache();
+            serviceCollection.AddMemoryCache(); //cach calısması ıcın bu mıcrosoftdan gelıyor  (memorycachemanager)
             serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
+            serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>(); //cahce ıcın yazılır senden ıcache ısterse memory ver 
         }
     }
 }

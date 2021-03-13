@@ -43,7 +43,7 @@ namespace WebAPI
                 options.AddPolicy("AllowOrigin",
                     builder => builder.WithOrigins("http://localhost:3000"));
             });
-            
+            services.AddCors();
             //services.AddSingleton<IProductService ,ProductManager>(); //birisi senden ýproductservice isterse onu productmanager ver
             //services.AddSingleton<IProductDal,EfProductDal >(); //birisi ýproduct dal ýsterse efproductdalý ver ona demek 
             ////IoC Container yapýyoruz burda  
@@ -84,14 +84,14 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseAuthentication();
+            app.UseAuthentication();  //bir yere girmek ýcýn anahtar
 
-            app.UseAuthorization();
+            app.UseAuthorization(); //yetkýsý varmý yokmu 
 
             app.UseEndpoints(endpoints =>
             {
