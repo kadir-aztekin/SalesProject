@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
+
 
 namespace WebAPI.Controllers
 {
@@ -12,19 +14,20 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        IProductService _productService;
+        ICategoryService _categoryService;
 
-        public CategoriesController(IProductService productService)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _productService = productService;
+            _categoryService = categoryService;
         }
         [HttpGet ("getall")]
         public IActionResult GetAll()
         {
-            var result = _productService.GetAll();
+            Thread.Sleep(1000);
+            var result = _categoryService.GetAll();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
