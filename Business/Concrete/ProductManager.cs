@@ -29,7 +29,7 @@ namespace Business.Concrete
             _productDal = productDal;
             _categoryService = categoryService;
         }
-        //[SecuredOperation("product.add,admin")]
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult  Add(Product product)
@@ -53,9 +53,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.ProductsListed);
         }
 
-        public IDataResult<List<Product>> GetAllByCategoryId(int ıd)
+        public IDataResult<List<Product>> GetAllByCategoryId(int categoryId)
         {
-            return   new SuccessDataResult<List<Product>>(_productDal.GetAll(c => c.CategoryId == ıd));
+            return   new SuccessDataResult<List<Product>>(_productDal.GetAll(c => c.CategoryId == categoryId));
         }
         [CacheAspect]
         public IDataResult<Product> GetById(int productId)
